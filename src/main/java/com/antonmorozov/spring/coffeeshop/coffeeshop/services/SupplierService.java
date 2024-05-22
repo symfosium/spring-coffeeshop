@@ -17,7 +17,7 @@ public class SupplierService {
         this.supplierRepository = supplierRepository;
     }
 
-    public List<Supplier> findAllTSuppliers() {
+    public List<Supplier> findAllSuppliers() {
         return supplierRepository.findAll();
     }
 
@@ -25,7 +25,7 @@ public class SupplierService {
         return supplierRepository.findById(id).orElse(null);
     }
 
-    public void saveToimittaja(Supplier supplier) {
+    public void saveSupplier(Supplier supplier) {
         supplierRepository.save(supplier);
     }
 
