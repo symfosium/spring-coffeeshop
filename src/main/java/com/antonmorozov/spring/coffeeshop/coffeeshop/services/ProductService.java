@@ -27,10 +27,10 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public void saveProduct(Product tuote, MultipartFile file) throws IOException {
+    public void saveProduct(Product product, MultipartFile file) throws IOException {
         if (file != null && !file.isEmpty()) {
-            tuote.setTuotekuva(file.getBytes());
-            productRepository.save(tuote);
+            product.setProductPicture(file.getBytes());
+            productRepository.save(product);
         } else {
             throw new IllegalArgumentException("File is empty or null");
         }
