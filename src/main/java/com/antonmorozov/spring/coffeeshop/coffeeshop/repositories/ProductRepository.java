@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query("SELECT t FROM Product t JOIN FETCH t.department o WHERE o.id = :osastoID OR o.departmentIDP = :osastoID")
+    @Query("SELECT t FROM Product t JOIN FETCH t.department o WHERE o.id = :departmentID OR o.departmentIDP = :departmentID")
     List<Product> findProductsByDepartmentID(@Param("departmentID") Long departmentID);
 
 }

@@ -22,6 +22,6 @@ public class Department {
 
     private String name;
 
-    @OneToMany(mappedBy = "osasto")
+    @OneToMany(mappedBy = "department")
     private List<Product> products = new ArrayList<>();
 }
