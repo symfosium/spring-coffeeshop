@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Osastot</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/departments.css}" />
+</head>
+<body>
+<div>
+    <h1>Lisää uusi osasto</h1>
+    <nav>
+        <ul>
+            <li><a href="/">Etusivu</a></li>
+
+            <li><a href="/coffeemachines">Kahvilaitteet</a></li>
+            <li><a href="/consumerproducts">Kulutustuotteet</a></li>
+            <li><a href="/products">Tuotteet</a></li>
+            <li><a href="/manufacturers">Valmistajat</a></li>
+            <li><a href="/suppliers">Toimittajat</a></li>
+
+            <li><a href="/departments">Osastot</a></li>
+        </ul>
+    </nav>
+</div>
+<div>
+    <form action="/add-department" method="post">
+        <label for="name">Osaston nimi:</label>
+        <input type="text" id="name" name="name" th:required="required" /><br />
+        <label for="departmentIDP">Osastoidp (0-7):</label>
+        <input
+                type="number"
+                id="departmentIDP"
+                name="departmentIDP"
+                min="0"
+                max="7"
+                th:required="required"
+        />
+        <input type="submit" value="Lisää osasto" />
+    </form>
+</div>
+<div>
+    <h1>Lisätyt osastot</h1>
+    <div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>departmentIDP</th>
+            </tr>
+            <tr th:each="department : ${departments}">
+                <td th:text="${department.id}"></td>
+                <td th:text="${department.name}"></td>
+                <td th:text="${department.departmentIDP}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Kulutustuotteet</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/consumerproducts.css}" />
+</head>
+<body>
+<div>
+    <h1>Kulutustuotteet</h1>
+    <nav>
+        <ul>
+            <li><a href="/">Etusivu</a></li>
+            <li><a href="/coffeemachines">Kahvilaitteet</a></li>
+            <li><a href="/consumerproducts">Kulutustuotteet</a></li>
+            <li><a href="/products">Tuotteet</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="grid-container">
+    <!-- Iterate over the list of coffee equipment products -->
+    <div th:each="tuote : ${consumerproducts}" class="grid-item">
+        <div>
+            <!-- Display product image -->
+            <img
+                    class="product-image"
+                    th:src="@{'/productImage/' + ${product.id}}"
+                    alt="Product Image"
+            />
+        </div>
+
+        <div class="product-details">
+            <h3 th:text="${product.name}"></h3>
+            <div class="price-container">
+                <p>
+              <span
+                      style="font-weight: bold; font-size: large; color: white"
+                      th:text="${product.price}"
+              ></span>
+                    <i
+                            class="fa-solid fa-euro-sign euro-icon"
+                            style="color: white"
+                    ></i>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

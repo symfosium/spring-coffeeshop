@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Toimittajat</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/suppliers.css}" />
+</head>
+<body>
+<div>
+    <h1>Toimittajat</h1>
+    <nav>
+        <ul>
+            <li><a href="/">Etusivu</a></li>
+            <li><a href="/coffeemachines">Kahvilaitteet</a></li>
+            <li><a href="/consumerproducts">Kulutustuotteet</a></li>
+            <li><a href="/products">Tuotteet</a></li>
+            <li><a href="/manufacturers">Valmistajat</a></li>
+            <li><a href="/suppliers">Toimittajat</a></li>
+            <li><a href="/departments">Osastot</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div>
+    <h2>Lisää uusi toimittaja</h2>
+    <form action="/add-supplier" method="post">
+        <label for="name">Nimi:</label><br />
+        <input type="text" id="name" name="name" required /><br />
+
+        <label for="contactinfo">Yhteystieto:</label><br />
+        <input type="text" id="contactinfo" name="contactinfo" required /><br />
+
+        <label for="contactinfoemail">Yhteyshenkilon Email:</label><br />
+        <input
+                type="email"
+                id="contactinfoemail"
+                name="contactinfoemail"
+                required
+        /><br />
+
+        <input type="submit" value="Lisää toimittaja" />
+    </form>
+</div>
+
+<div>
+    <h2>Lisätyt toimittajat</h2>
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nimi</th>
+            <th>Yhteystieto</th>
+            <th>Yhteyshenkilon Email</th>
+            <th>Toiminnot</th>
+        </tr>
+        <!-- Iterate over the list of suppliers and display them in table rows -->
+        <tr th:each="supplier : ${suppliers}">
+            <td th:text="${supplier.id}"></td>
+            <td th:text="${supplier.name}"></td>
+            <td th:text="${supplier.contact}"></td>
+            <td th:text="${supplier.contactEmail}"></td>
+            <td class="action-buttons">
+                <form
+                        th:action="@{'/edit-supplier/' + ${supplier.id}}"
+                        method="get"
+                >
+                    <input
+                            type="hidden"
+                            name="supplierId"
+                            th:value="${supplier.id}"
+                    />
+                    <input type="submit" value="Muokkaa" class="action-button" />
+                </form>
+
+                <form
+                        th:action="@{'/delete-supplier/' + ${supplier.id}}"
+                        method="post"
+                        onsubmit="return confirmDelete()"
+                >
+                    <input
+                            type="hidden"
+                            name="supplierId"
+                            th:value="${supplier.id}"
+                    />
+                    <input type="submit" value="Poista" class="action-button" />
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script th:if="${error}">
+    setTimeout(function () {
+        window.location.href = "/suppliers";
+    }, 3000);
+</script>
+</body>
+</html>
