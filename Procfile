@@ -1,0 +1,1 @@
+web: java -jar target/coffee-shop-0.0.1-SNAPSHOT.jar
