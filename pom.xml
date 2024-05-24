@@ -64,7 +64,10 @@
                     <target>11</target>
                     <release>11</release>
                     <compilerArgs>
-                        <arg>-parameters</arg>
+                        <arg>-source</arg>
+                        <arg>11</arg>
+                        <arg>-target</arg>
+                        <arg>11</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
