@@ -24,4 +24,8 @@ public class DepartmentService {
     public void saveDepartment(Department department) {
         departmentRepository.save(department);
     }
+
+    public void deleteDepartmentById(Long id) {
+        departmentRepository.deleteById(id);
+    }
 }

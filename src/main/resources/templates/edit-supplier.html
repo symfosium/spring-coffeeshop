@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Muokkaa Toimittajaa</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/edit-supplier.css}" />
+</head>
+<body>
+<div>
+    <h1>Muokkaa Toimittajaa</h1>
+    <form
+            th:action="@{'/edit-supplier/' + ${supplier.id}}"
+            method="post"
+    >
+        <input type="hidden" name="_method" value="PUT" />
+        <label for="name">Nimi:</label><br />
+        <input
+                type="text"
+                id="name"
+                name="name"
+                th:value="${supplier.name}"
+                required
+        /><br />
+
+        <label for="contactinfo">Yhteystieto:</label><br />
+        <input
+                type="text"
+                id="contactinfo"
+                name="contactinfo"
+                th:value="${supplier.contact}"
+                required
+        /><br />
+
+        <label for="contactemail">Yhteyshenkilon Email:</label><br />
+        <input
+                type="email"
+                id="contactemail"
+                name="contactemail"
+                th:value="${supplier.contactEmail}"
+                required
+        /><br />
+
+        <input type="submit" value="Tallenna muutokset" />
+    </form>
+</div>
+</body>
+</html>

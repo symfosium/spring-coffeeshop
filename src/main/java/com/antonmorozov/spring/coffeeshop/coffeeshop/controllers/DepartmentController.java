@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -31,6 +32,12 @@ public class DepartmentController {
     @PostMapping("/add-department")
     public String lisaaOsasto(@ModelAttribute Department department) {
         departmentService.saveDepartment(department);
-        return "redirect:/osastot";
+        return "redirect:/departments";
+    }
+
+    @PostMapping("/delete-department/{id}")
+    public String poistaOsasto(@PathVariable("id") Long id) {
+        departmentService.deleteDepartmentById(id);
+        return "redirect:/departments";
     }
 }

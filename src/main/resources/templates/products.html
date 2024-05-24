@@ -5,7 +5,7 @@
     <title>Tuotteet</title>
     <link rel="stylesheet" type="text/css" th:href="@{/products.css}" />
     <style>
-        #kuvaus-error {
+        #description-error {
             color: red;
             display: none;
         }
@@ -28,60 +28,33 @@
 </div>
 <h2>Lisää uusi tuote</h2>
 
-<form
-        action="/add-product"
-        method="post"
-        class="add-product"
-        enctype="multipart/form-data"
->
+<form action="/add-product" method="post" class="add-product" enctype="multipart/form-data">
     <label for="name">Nimi:</label>
     <input type="text" id="name" name="name" required />
-
-    <!-- Muut lomakkeen kentät -->
 
     <label for="description">Kuvaus:</label>
     <div id="description-error">Kuvaus saa olla enintään 1000 merkkiä pitkä.</div>
     <textarea id="description" name="description" required></textarea>
 
     <label for="price">Hinta:</label>
-    <input
-            type="text"
-            id="price"
-            name="price"
-            required
-            pattern="\d+(\.\d{2})?"
-            title="Syötä hinta muodossa xx.xx"
-    />
+    <input type="text" id="price" name="price" required pattern="\d+(\.\d{2})?" title="Syötä hinta muodossa xx.xx" />
 
     <label for="picture">Kuva:</label>
     <input type="file" id="picture" name="picture" accept="image/*" required />
 
-    <!-- Supplier dropdown menu -->
     <label for="supplier">Toimittaja:</label>
     <select id="supplier" name="supplier" required>
-        <option
-                th:each="supplier : ${suppliers}"
-                th:value="${supplier.id}"
-        >
-            <span th:text="${supplier.name}"></span>
-        </option>
+        <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"></option>
     </select>
 
     <label for="manufacturer">Valmistaja:</label>
     <select id="manufacturer" name="manufacturer" required>
-        <option
-                th:each="manufacturer : ${manufacturers}"
-                th:value="${manufacturer.id}"
-        >
-            <span th:text="${manufacturer.name}"></span>
-        </option>
+        <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.id}" th:text="${manufacturer.name}"></option>
     </select>
 
     <label for="department">Osasto:</label>
     <select id="department" name="department" required>
-        <option th:each="department : ${departments}" th:value="${department.id}">
-            <span th:text="${department.name}"></span>
-        </option>
+        <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}"></option>
     </select>
 
     <input type="submit" value="Lisää tuote" />
@@ -102,22 +75,18 @@
         </tr>
 
         <!-- Iterate over the list of products and display them in table rows -->
-        <tr th:each="tuote : ${products}">
+        <tr th:each="product : ${products}">
             <td th:text="${product.id}"></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.description}"></td>
             <td th:text="${product.price}"></td>
             <td th:text="${product.supplier.name}"></td>
-            <td th:text="${product.supplier.name}"></td>
+            <td th:text="${product.manufacturer.name}"></td>
             <td th:text="${product.department.name}"></td>
             <td>
                 <!-- Delete button with confirmation -->
-                <form
-                        th:action="@{/delete-product/{id}(id=${product.id})}"
-                        method="post"
-                        onsubmit="return confirmDelete()"
-                >
-                    <input type="hidden" name="tuoteId" th:value="${product.id}" />
+                <form th:action="@{/delete-product/{id}(id=${product.id})}" method="post" onsubmit="return confirmDelete()">
+                    <input type="hidden" name="productId" th:value="${product.id}" />
                     <input type="submit" value="Poista" />
                 </form>
             </td>
@@ -125,15 +94,13 @@
     </table>
 </div>
 <script>
-    document
-        .querySelector(".add-product")
-        .addEventListener("submit", function (event) {
-            var description = document.getElementById("description").value;
-            if (description.length > 1000) {
-                event.preventDefault();
-                document.getElementById("description-error").style.display = "block";
-            }
-        });
+    document.querySelector(".add-product").addEventListener("submit", function (event) {
+        var description = document.getElementById("description").value;
+        if (description.length > 1000) {
+            event.preventDefault();
+            document.getElementById("description-error").style.display = "block";
+        }
+    });
 </script>
 </body>
 </html>
