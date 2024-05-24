@@ -60,15 +60,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                    <release>11</release>
-                    <compilerArgs>
-                        <arg>-source</arg>
-                        <arg>11</arg>
-                        <arg>-target</arg>
-                        <arg>11</arg>
-                    </compilerArgs>
+                    <release>17</release>
                 </configuration>
             </plugin>
         </plugins>
